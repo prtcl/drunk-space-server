@@ -9,7 +9,7 @@ function Space (size) {
     this.size = size || 10;
     this.position = [0, 0, 0];
     this.points = [];
-    for (var i = 0; i <= this.size; i++) {
+    for (var i = 0; i < this.size; i++) {
         this.points.push(new Point());
     }
     this.move(this.position);

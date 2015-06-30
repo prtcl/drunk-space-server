@@ -6,7 +6,7 @@ module.exports = function (pa, pb) {
     var d = Math.sqrt(
         _.reduce(
             _.times(n, function (i) {
-                return Math.pow(pa[i] - pb[i], n);
+                return Math.pow(pb[i] - pa[i], 2);
             }),
             function (m, n){ return m + n; }
         , 0)
