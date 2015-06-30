@@ -19,7 +19,7 @@ Cursor.prototype.stop = function () {
     return this;
 };
 
-Cursor.prototype.run = function () {
+Cursor.prototype.start = function () {
     this.metro && this.metro.stop();
     this.isRunning = true;
     this.metro = plonk.metro(this.time, this.tickHandler, this);
