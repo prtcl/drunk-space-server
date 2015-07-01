@@ -1,5 +1,6 @@
 
 var _ = require('lodash'),
+    plonk = require('plonk'),
     osc = require('node-osc');
 
 var port = process.argv[2] ? parseInt(process.argv[2]) : 8888;
@@ -10,8 +11,8 @@ var client = new osc.Client('127.0.0.1', port),
 console.log('--- OSC sending on 127.0.0.1:' + port + ' ---');
 console.log('--- OSC receiving on 0.0.0.0:' + (port + 1) + ' ---');
 
-var Space = require('./models/space'),
-    Cursor = require('./controllers/cursor');
+var Space = require('./app/models/space'),
+    Cursor = require('./app/controllers/cursor');
 
 var space = new Space(), cursor = new Cursor();
 
@@ -24,8 +25,14 @@ server.on('message', function (message) {
     } else if (type === '/stop') {
         cursor.stop();
         console.log('Stopped.');
+    } else if (type === '/movement') {
+        cursor.movementAmount = plonk.constrain(args[0], 0, 1);
+    } else if (type === '/sway') {
+        cursor.swayAmount = plonk.constrain(args[0], 0, 1);
+    } else if (type === '/jitter') {
+        cursor.jitterAmount = plonk.constrain(args[0], 0, 1);
     } else if (type === '/space/generate' && args.length) {
-        space.generate(args[0]);
+        space.generate(plonk.constrain(args[0], 0, 9999));
         console.log('Space generated with ' + args[0] + ' points.');
     } else if (type === '/space/regenerate') {
         space.regenerate();
