@@ -7,6 +7,7 @@
     "lodash": "^3.8.0",
     "node-osc": "^0.3.0",
     "plonk": "*",
+    "proc-noise": "0.0.1",
     "uid2": "0.0.3"
   },
   "devDependencies": {},
